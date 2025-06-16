@@ -35,27 +35,40 @@ function App() {
 
       {/* Hero Section */}
       <section
-        id="inicio"
-        className="relative min-h-screen flex items-end justify-center pt-20 pb-8 px-4"
-        style={{
-          backgroundImage: "url('/portada.JPG')",
-          backgroundSize: "cover",
-          backgroundPosition: "center 30%",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-        <div className="container mx-auto text-center relative z-10 max-w-4xl">
-          <div className="mb-8">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 drop-shadow-2xl">
-              Grupo Zambra 2.0
-            </h1>
-            <p className="text-xl md:text-2xl lg:text-3xl text-white mb-8 max-w-3xl mx-auto drop-shadow-xl font-medium">
-              Música en vivo para hacer de tu evento una experiencia inolvidable
-            </p>
-          </div>
-        </div>
-      </section>
+      id="inicio"
+      className="relative flex items-end justify-center pt-20 pb-6 px-4 overflow-hidden
+                h-[70vh] sm:h-[80vh] md:h-screen lg:min-h-screen"
+    >
+      <style jsx>{`
+        @media (min-width: 768px) {
+          .hero-image {
+            object-position: center 25% !important;
+          }
+        }
+      `}</style>
+
+      <div className="absolute inset-0">
+        <img
+          src="/portada.webp"
+          alt="Grupo Zambra 2.0"
+          className="w-full h-full object-cover scale-85 sm:scale-100 md:scale-147 hero-image"
+        />
+      </div>
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+      {/* Contenedor del texto: Absoluto y cerca del borde inferior */}
+      <div className="absolute bottom-16 left-8 right-8 text-center text-white z-10 max-w-4xl mx-auto">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold drop-shadow-2xl">
+          Grupo Zambra 2.0
+        </h1>
+        <p className="mt-3 text-base sm:text-lg md:text-xl lg:text-2xl drop-shadow-xl font-medium px-2 sm:px-4">
+          Música en vivo para hacer de tu evento una experiencia inolvidable
+        </p>
+      </div>
+    </section>
+
 
       {/* About Section */}
       <section id="sobre-nosotros" className="py-16 px-4 bg-white">
@@ -92,7 +105,7 @@ function App() {
                   <Card key={i} className="overflow-hidden border-primary-200 hover:shadow-lg transition-shadow">
                     <CardContent className="p-0">
                       <img
-                        src={`/galeria${i}.jpg`}
+                        src={`/galeria${i}.webp`}
                         alt={`Foto del grupo ${i}`}
                         className="w-full h-64 object-cover"
                       />
@@ -112,7 +125,8 @@ function App() {
                       <video
                         controls
                         className="w-full h-64 object-cover"
-                        src={`/video${i}.mp4`} // Asegúrate de tener video1.mp4 y video2.mp4 en la carpeta public/
+                        src={`/video${i}.mp4`}
+                        poster={`/poster${i}.png`}
                       >
                         Tu navegador no soporta el elemento de video.
                       </video>
