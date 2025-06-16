@@ -172,9 +172,9 @@ function App() {
                   <Button
                     variant="outline"
                     className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white"
-                    onClick={() => window.open("tel:+34123456789", "_self")}
+                    onClick={() => window.open("tel:654 085 517", "_self")}
                   >
-                    +34 654 085 517
+                    654 085 517
                   </Button>
                 </CardContent>
               </Card>
