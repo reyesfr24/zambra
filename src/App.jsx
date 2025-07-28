@@ -119,20 +119,40 @@ function App() {
             <div>
               <h3 className="text-2xl font-semibold text-primary-700 mb-6 text-center">Videos</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[1, 2].map((i) => (
-                  <Card key={i} className="overflow-hidden border-primary-200">
-                    <CardContent className="p-0">
-                      <video
-                        controls
-                        className="w-full h-64 object-cover"
-                        src={`/video${i}.mp4`}
-                        poster={`/poster${i}.png`}
-                      >
-                        Tu navegador no soporta el elemento de video.
-                      </video>
-                    </CardContent>
-                  </Card>
-                ))}
+                {/* Primer video: incrustado desde YouTube */}
+                <Card className="overflow-hidden border-primary-200">
+                  <CardContent className="p-0">
+                    <div className="w-full h-64">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src="https://www.youtube.com/embed/m11u6u58gCo"
+                        title="Video de Grupo Zambra 2.0"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full object-cover"
+                      ></iframe>
+                    </div>
+                  </CardContent>
+                </Card>
+                {/* Segundo video: incrustado desde YouTube */}
+                <Card className="overflow-hidden border-primary-200">
+                  <CardContent className="p-0">
+                    <div className="w-full h-64">
+                      <iframe
+                        width="100%"
+                        height="100%"
+                        src="https://www.youtube.com/embed/VdOtZ0TS53M"
+                        title="Video de Grupo Zambra 2.0"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full object-cover"
+                      ></iframe>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
