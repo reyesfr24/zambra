@@ -1,12 +1,41 @@
-# React + Vite
+# Grupo Zambra 2.0 - Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Landing page profesional para el grupo musical **Grupo Zambra 2.0**, desarrollada con React, Vite y Tailwind CSS.
 
-Currently, two official plugins are available:
+## 🚀 Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Diseño responsivo** y moderno.
+- Secciones: Inicio, Sobre Nosotros, Galería (fotos y videos), Contacto.
+- Componentes reutilizables con [Tailwind CSS](https://tailwindcss.com/) y utilidades personalizadas.
+- Animaciones y efectos visuales.
+- Integración con Instagram, teléfono y correo electrónico.
+- Código organizado y fácil de mantener.
 
-## Expanding the ESLint configuration
+## 📸 Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+![Demo de la landing page](public/portada.webp)
+
+## 📂 Estructura del proyecto
+
+```bash
+src
+├── assets            # Archivos estáticos (imágenes, fuentes, etc.)
+├── components        # Componentes reutilizables de React
+├── layouts           # Plantillas de diseño para las páginas
+├── pages             # Páginas de la aplicación
+├── App.jsx           # Componente raíz de la aplicación
+└── main.jsx          # Archivo de entrada de la aplicación
+tailwind.config.js    # Configuración de Tailwind CSS
+vite.config.js        # Configuración de Vite
+```
+
+## 🛠️ Instalación y ejecución
+
+1. Clonar el repositorio
+2. Instalar dependencias: `npm install`
+3. Ejecutar el servidor de desarrollo: `npm run dev`
+4. Abrir en el navegador: `http://localhost:5173`
+
+## 📧 Contacto
+
+Para más información o consultas, por favor contactar a través de las redes sociales de **Grupo Zambra 2.0** o enviar un correo electrónico a [info@grupozambra20.com](mailto:info@grupozambra20.com).
