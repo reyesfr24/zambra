@@ -276,7 +276,6 @@ function App() {
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {[
                 'galeria1.webp',
-                'galeria2.webp',
                 'galeria3.webp',
                 'galeria4.webp',
                 'galeria5.webp',
