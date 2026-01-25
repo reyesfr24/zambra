@@ -1,235 +1,462 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Instagram, Phone, Mail } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Instagram, Phone, Mail, Play, ChevronDown, Menu, X } from 'lucide-react'
 
 function App() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    setMobileMenuOpen(false)
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-primary-100">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 border-b border-primary-200">
-        <div className="container mx-auto px-4 py-4">
+    <div className="min-h-screen bg-white">
+      {/* ========== NAVEGACIÓN ========== */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-white/95 backdrop-blur-md shadow-elegant py-3'
+          : 'bg-black/20 backdrop-blur-sm py-4'
+      }`}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center">
-            {/* Logo + Nombre */}
-            <div className="flex items-center space-x-3">
-              <img src="/logo.jpg" alt="Logo Grupo Zambra" className="h-10 w-auto rounded-full object-cover" />
-              <h1 className="text-xl font-bold text-primary-800">Grupo Zambra 2.0</h1>
+            {/* Logo */}
+            <button
+              onClick={() => scrollToSection('inicio')}
+              className="flex items-center gap-3"
+            >
+              <img
+                src="/logo.jpg"
+                alt="Logo Grupo Zambra"
+                className="h-10 w-10 rounded-full object-cover ring-2 ring-accent/50"
+              />
+              <span className={`font-display font-bold text-lg transition-colors ${
+                isScrolled ? 'text-accent-900' : 'text-white'
+              }`}>
+                Zambra 2.0
+              </span>
+            </button>
+
+            {/* Nav Desktop */}
+            <div className="hidden md:flex items-center gap-1">
+              {[
+                { id: 'inicio', label: 'Inicio' },
+                { id: 'sobre-nosotros', label: 'Nosotros' },
+                { id: 'galeria', label: 'Galería' },
+                { id: 'contacto', label: 'Contacto' },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className={`px-4 py-2 font-display font-medium text-sm rounded-lg transition-colors ${
+                    isScrolled
+                      ? 'text-accent-700 hover:text-accent-900 hover:bg-accent-50'
+                      : 'text-white/90 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+              <button
+                onClick={() => scrollToSection('contacto')}
+                className="ml-3 px-5 py-2 bg-accent-600 text-white font-display font-semibold text-sm rounded-lg hover:bg-accent-700 transition-colors"
+              >
+                Contrátanos
+              </button>
             </div>
-            {/* Navegación */}
-            <div className="hidden md:flex space-x-6">
-              <a href="#inicio" className="text-primary-700 hover:text-primary-900 transition-colors">
-                Inicio
-              </a>
-              <a href="#sobre-nosotros" className="text-primary-700 hover:text-primary-900 transition-colors">
-                Sobre Nosotros
-              </a>
-              <a href="#galeria" className="text-primary-700 hover:text-primary-900 transition-colors">
-                Galería
-              </a>
-              <a href="#contacto" className="text-primary-700 hover:text-primary-900 transition-colors">
-                Contacto
-              </a>
-            </div>
+
+            {/* Mobile Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`md:hidden p-2 rounded-lg ${
+                isScrolled ? 'text-accent-900' : 'text-white'
+              }`}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-accent-100 shadow-lg">
+            <div className="px-4 py-4 space-y-1">
+              {[
+                { id: 'inicio', label: 'Inicio' },
+                { id: 'sobre-nosotros', label: 'Sobre Nosotros' },
+                { id: 'galeria', label: 'Galería' },
+                { id: 'contacto', label: 'Contacto' },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="block w-full text-left px-4 py-3 font-display font-medium text-accent-800 hover:bg-accent-50 rounded-lg"
+                >
+                  {item.label}
+                </button>
+              ))}
+              <button
+                onClick={() => scrollToSection('contacto')}
+                className="w-full mt-2 px-4 py-3 bg-accent-600 text-white font-display font-semibold rounded-lg"
+              >
+                Contrátanos
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
-      {/* Hero Section */}
+      {/* ========== HERO SECTION ========== */}
       <section
-      id="inicio"
-      className="relative flex items-end justify-center pt-20 pb-6 px-4 overflow-hidden
-                h-[70vh] sm:h-[80vh] md:h-screen lg:min-h-screen"
-    >
-      <style jsx>{`
-        @media (min-width: 768px) {
-          .hero-image {
-            object-position: center 25% !important;
-          }
-        }
-      `}</style>
+        id="inicio"
+        className="relative h-[70vh] min-h-[500px] md:h-[80vh] lg:h-screen lg:min-h-[800px]"
+      >
+        {/* Background */}
+        <div className="absolute inset-0">
+          <img
+            src="/portada.webp"
+            alt="Grupo Zambra 2.0"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center 30%' }}
+          />
+          {/* Gradiente inferior para el texto */}
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
+        </div>
 
-      <div className="absolute inset-0">
-        <img
-          src="/portada.webp"
-          alt="Grupo Zambra 2.0"
-          className="w-full h-full object-cover scale-85 sm:scale-100 md:scale-147 hero-image"
-        />
-      </div>
+        {/* Content - Compacto abajo */}
+        <div className="absolute inset-x-0 bottom-8 z-10 text-center px-4">
+          <h1 className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-white mb-2 drop-shadow-lg">
+            GRUPO ZAMBRA <span className="text-accent">2.0</span>
+          </h1>
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+          <p className="font-body text-sm md:text-base text-white/90 max-w-md mx-auto mb-4 drop-shadow">
+            Música en vivo para tu evento inolvidable
+          </p>
 
-      {/* Contenedor del texto: Absoluto y cerca del borde inferior */}
-      <div className="absolute bottom-16 left-8 right-8 text-center text-white z-10 max-w-4xl mx-auto">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold drop-shadow-2xl">
-          Grupo Zambra 2.0
-        </h1>
-        <p className="mt-3 text-base sm:text-lg md:text-xl lg:text-2xl drop-shadow-xl font-medium px-2 sm:px-4">
-          Música en vivo para hacer de tu evento una experiencia inolvidable
-        </p>
-      </div>
-    </section>
-
-
-      {/* About Section */}
-      <section id="sobre-nosotros" className="py-16 px-4 bg-white">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-primary-800 mb-8">Sobre Nosotros</h2>
-            <div className="text-left max-w-3xl mx-auto">
-              <p className="text-lg text-primary-700 leading-relaxed mb-6">
-                Grupo Zambra 2.0 es un grupo musical con una amplia trayectoria en el mundo del entretenimiento.
-                Nuestro compromiso es brindar la mejor música en vivo para hacer de cada evento una experiencia única e inolvidable.
-              </p>
-              <p className="text-lg text-primary-700 leading-relaxed mb-6">
-                Con un repertorio que abarca desde los clásicos más queridos hasta los éxitos más actuales, nos adaptamos a los gustos de cada cliente.
-              </p>
-              <p className="text-lg text-primary-700 leading-relaxed">
-                En Grupo Zambra 2.0 entendemos que la música es el alma de cualquier celebración.
-              </p>
-            </div>
+          <div className="flex flex-wrap gap-3 justify-center">
+            <button
+              onClick={() => scrollToSection('galeria')}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-accent-900 font-display font-bold text-sm rounded-lg hover:bg-accent-300 transition-colors"
+            >
+              <Play size={16} />
+              Ver Videos
+            </button>
+            <button
+              onClick={() => scrollToSection('contacto')}
+              className="px-5 py-2.5 bg-white/15 backdrop-blur-sm border border-white/30 text-white font-display font-semibold text-sm rounded-lg hover:bg-white/25 transition-colors"
+            >
+              Contactar
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Gallery Section */}
-      <section id="galeria" className="py-16 px-4 bg-primary-50">
-        <div className="container mx-auto">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-primary-800 text-center mb-12">Galería</h2>
+      {/* ========== SOBRE NOSOTROS ========== */}
+      <section id="sobre-nosotros" className="py-20 md:py-28 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          {/* Header */}
+          <div className="text-center mb-14">
+            <span className="inline-block px-3 py-1 bg-accent-100 text-accent-700 font-display font-semibold text-sm rounded-full mb-4">
+              Conócenos
+            </span>
+            <h2 className="font-display font-black text-3xl md:text-4xl lg:text-5xl text-accent-900 mb-4">
+              Sobre Nosotros
+            </h2>
+            <div className="w-16 h-1 bg-accent mx-auto rounded-full" />
+          </div>
 
-            {/* Photos Grid */}
-            <div className="mb-12">
-              <h3 className="text-2xl font-semibold text-primary-700 mb-6 text-center">Fotos</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[1, 2, 3, 4, 5, 6].map((i) => (
-                  <Card key={i} className="overflow-hidden border-primary-200 hover:shadow-lg transition-shadow">
-                    <CardContent className="p-0">
-                      <img
-                        src={`/galeria${i}.webp`}
-                        alt={`Foto del grupo ${i}`}
-                        className="w-full h-64 object-cover"
-                      />
-                    </CardContent>
-                  </Card>
+          {/* Content */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <p className="font-body text-lg text-accent-800 leading-relaxed">
+                <span className="font-display font-bold text-accent-600 text-xl">Grupo Zambra 2.0</span> es mucho más que un grupo musical.
+                Somos artistas apasionados con una amplia trayectoria en el mundo del entretenimiento,
+                especializados en crear momentos únicos que perduran en la memoria.
+              </p>
+              <p className="font-body text-lg text-accent-700 leading-relaxed">
+                Nuestro repertorio fusiona los clásicos más queridos con los éxitos del momento,
+                adaptándonos perfectamente a los gustos de cada cliente. Desde bodas íntimas hasta
+                grandes eventos corporativos.
+              </p>
+              <p className="font-body text-lg text-accent-700 leading-relaxed">
+                En Grupo Zambra 2.0 entendemos que <span className="text-accent-600 font-semibold">la música es el alma de cualquier celebración</span>.
+              </p>
+
+              {/* Stats */}
+              <div className="flex flex-wrap gap-8 pt-4">
+                {[
+                  { number: '10+', label: 'Años de experiencia' },
+                  { number: '500+', label: 'Eventos realizados' },
+                  { number: '100%', label: 'Satisfacción' },
+                ].map((stat, i) => (
+                  <div key={i}>
+                    <div className="font-display font-black text-3xl text-accent-600">{stat.number}</div>
+                    <div className="font-body text-sm text-accent-600">{stat.label}</div>
+                  </div>
                 ))}
               </div>
             </div>
 
-            {/* Videos Grid */}
+            {/* Image */}
+            <div className="relative">
+              <div className="rounded-2xl overflow-hidden shadow-elegant-lg">
+                <img
+                  src="/galeria1.webp"
+                  alt="Grupo Zambra en acción"
+                  className="w-full h-80 lg:h-[420px] object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-accent rounded-xl -z-10" />
+              <div className="absolute -top-4 -right-4 w-16 h-16 border-4 border-accent-300 rounded-full -z-10" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== GALERÍA ========== */}
+      <section id="galeria" className="py-20 md:py-28 bg-accent-950">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          {/* Header */}
+          <div className="text-center mb-14">
+            <span className="inline-block px-3 py-1 bg-accent/20 text-accent font-display font-semibold text-sm rounded-full mb-4">
+              Nuestro Trabajo
+            </span>
+            <h2 className="font-display font-black text-3xl md:text-4xl lg:text-5xl text-white mb-4">
+              Galería
+            </h2>
+            <div className="w-16 h-1 bg-accent mx-auto rounded-full mb-4" />
+            <p className="font-body text-accent-300 max-w-xl mx-auto">
+              Descubre la energía y profesionalismo que aportamos a cada evento
+            </p>
+          </div>
+
+          {/* Videos */}
+          <div className="mb-16">
+            <div className="flex items-center justify-center gap-2 mb-8">
+              <Play className="w-5 h-5 text-accent" />
+              <h3 className="font-display font-bold text-xl text-white">
+                Videos en Directo
+              </h3>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                { id: 'm11u6u58gCo', title: 'Actuación en vivo' },
+                { id: 'VdOtZ0TS53M', title: 'Concierto especial' },
+              ].map((video) => (
+                <div key={video.id} className="video-container aspect-video">
+                  <iframe
+                    src={`https://www.youtube.com/embed/${video.id}`}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                    className="w-full h-full"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Fotos */}
+          <div>
+            <h3 className="font-display font-bold text-xl text-white text-center mb-8">
+              Momentos Capturados
+            </h3>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="gallery-image aspect-square">
+                  <img
+                    src={`/galeria${i}.webp`}
+                    alt={`Grupo Zambra 2.0 - Momento ${i}`}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== CONTACTO ========== */}
+      <section id="contacto" className="py-20 md:py-28 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          {/* Header */}
+          <div className="text-center mb-14">
+            <span className="inline-block px-3 py-1 bg-accent-100 text-accent-700 font-display font-semibold text-sm rounded-full mb-4">
+              Hablemos
+            </span>
+            <h2 className="font-display font-black text-3xl md:text-4xl lg:text-5xl text-accent-900 mb-4">
+              Contacto
+            </h2>
+            <div className="w-16 h-1 bg-accent mx-auto rounded-full mb-4" />
+            <p className="font-body text-lg text-accent-600 max-w-xl mx-auto">
+              ¿Listo para hacer de tu evento algo especial? Contáctanos y hablemos de tu celebración
+            </p>
+          </div>
+
+          {/* Cards */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Instagram */}
+            <a
+              href="https://instagram.com/grupozambra"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-elegant p-6 text-center group"
+            >
+              <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Instagram className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="font-display font-bold text-lg text-accent-900 mb-2">Instagram</h3>
+              <p className="font-body text-accent-600 text-sm mb-3">
+                Síguenos para ver nuestras últimas actuaciones
+              </p>
+              <span className="font-display font-semibold text-accent-500">
+                @grupozambra
+              </span>
+            </a>
+
+            {/* Teléfono */}
+            <a
+              href="tel:+34654085517"
+              className="card-elegant p-6 text-center group bg-accent-50 border-2 border-accent-200"
+            >
+              <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-accent-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-glow-accent">
+                <Phone className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="font-display font-bold text-lg text-accent-900 mb-2">Teléfono</h3>
+              <p className="font-body text-accent-600 text-sm mb-3">
+                Llámanos para consultas y reservas
+              </p>
+              <span className="font-display font-bold text-lg text-accent-600">
+                654 085 517
+              </span>
+            </a>
+
+            {/* Email */}
+            <a
+              href="mailto:contratacioneszambra@gmail.com"
+              className="card-elegant p-6 text-center group"
+            >
+              <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-accent flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Mail className="w-7 h-7 text-accent-900" />
+              </div>
+              <h3 className="font-display font-bold text-lg text-accent-900 mb-2">Email</h3>
+              <p className="font-body text-accent-600 text-sm mb-3">
+                Escríbenos para más información
+              </p>
+              <span className="font-display font-semibold text-accent-500 text-sm break-all">
+                contratacioneszambra@gmail.com
+              </span>
+            </a>
+          </div>
+
+          {/* WhatsApp CTA */}
+          <div className="text-center mt-12">
+            <p className="font-body text-accent-500 mb-4">¿Prefieres WhatsApp?</p>
+            <a
+              href="https://wa.me/34654085517?text=Hola,%20me%20gustaría%20información%20sobre%20contratar%20a%20Grupo%20Zambra%202.0"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-6 py-3 bg-green-500 text-white font-display font-bold rounded-lg hover:bg-green-600 transition-colors"
+            >
+              <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Escríbenos por WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== FOOTER ========== */}
+      <footer className="bg-accent-950 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="grid md:grid-cols-3 gap-10 mb-10">
+            {/* Brand */}
             <div>
-              <h3 className="text-2xl font-semibold text-primary-700 mb-6 text-center">Videos</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Primer video: incrustado desde YouTube */}
-                <Card className="overflow-hidden border-primary-200">
-                  <CardContent className="p-0">
-                    <div className="w-full h-64">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src="https://www.youtube.com/embed/m11u6u58gCo"
-                        title="Video de Grupo Zambra 2.0"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-full object-cover"
-                      ></iframe>
-                    </div>
-                  </CardContent>
-                </Card>
-                {/* Segundo video: incrustado desde YouTube */}
-                <Card className="overflow-hidden border-primary-200">
-                  <CardContent className="p-0">
-                    <div className="w-full h-64">
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        src="https://www.youtube.com/embed/VdOtZ0TS53M"
-                        title="Video de Grupo Zambra 2.0"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-full object-cover"
-                      ></iframe>
-                    </div>
-                  </CardContent>
-                </Card>
+              <div className="flex items-center gap-3 mb-4">
+                <img
+                  src="/logo.jpg"
+                  alt="Logo Grupo Zambra"
+                  className="h-10 w-10 rounded-full object-cover ring-2 ring-accent/30"
+                />
+                <span className="font-display font-bold text-lg text-white">
+                  Zambra 2.0
+                </span>
+              </div>
+              <p className="font-body text-accent-400 text-sm leading-relaxed">
+                Música en vivo para eventos inolvidables. Bodas, fiestas corporativas
+                y todo tipo de celebraciones.
+              </p>
+            </div>
+
+            {/* Links */}
+            <div>
+              <h4 className="font-display font-bold text-white mb-4">Enlaces</h4>
+              <div className="space-y-2">
+                {['Inicio', 'Sobre Nosotros', 'Galería', 'Contacto'].map((item) => (
+                  <button
+                    key={item}
+                    onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
+                    className="block font-body text-sm text-accent-400 hover:text-accent transition-colors"
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Social */}
+            <div>
+              <h4 className="font-display font-bold text-white mb-4">Síguenos</h4>
+              <div className="flex gap-3">
+                <a
+                  href="https://instagram.com/grupozambra"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={18} />
+                </a>
+                <a href="tel:+34654085517" className="social-icon" aria-label="Teléfono">
+                  <Phone size={18} />
+                </a>
+                <a href="mailto:contratacioneszambra@gmail.com" className="social-icon" aria-label="Email">
+                  <Mail size={18} />
+                </a>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Contact Section */}
-      <section id="contacto" className="py-16 px-4 bg-white">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-primary-800 mb-8">Contacto</h2>
-            <p className="text-xl text-primary-700 mb-12">
-              ¿Listo para hacer de tu evento algo especial? Contáctanos y hablemos de tu celebración
-            </p>
+          <div className="h-px bg-accent-800 mb-6" />
 
-            <div className="grid md:grid-cols-3 gap-8">
-              <Card className="overflow-hidden border-primary-200 hover:shadow-lg transition-shadow min-w-[300px]">
-                <CardContent className="p-8 text-center">
-                  <Instagram className="w-12 h-12 text-primary-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-primary-800 mb-2">Instagram</h3>
-                  <p className="text-primary-600 mb-4">Síguenos para ver nuestras últimas actuaciones</p>
-                  <Button
-                    variant="outline"
-                    className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white"
-                    onClick={() => window.open("https://instagram.com/grupozambra", "_blank")}
-                  >
-                    @grupozambra
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="overflow-hidden border-primary-200 hover:shadow-lg transition-shadow min-w-[300px]">
-                <CardContent className="p-8 text-center">
-                  <Phone className="w-12 h-12 text-primary-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-primary-800 mb-2">Teléfono</h3>
-                  <p className="text-primary-600 mb-4">Llámanos para consultas y reservas</p>
-                  <Button
-                    variant="outline"
-                    className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white"
-                    onClick={() => window.open("tel:654 085 517", "_self")}
-                  >
-                    654 085 517
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="overflow-hidden border-primary-200 hover:shadow-lg transition-shadow min-w-[300px]">
-                <CardContent className="p-8 text-center">
-                  <Mail className="w-12 h-12 text-primary-600 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-primary-800 mb-2">Email</h3>
-                  <p className="text-primary-600 mb-4">Escríbenos para más información</p>
-                  <div className="flex justify-center">
-                    <Button
-                      variant="outline"
-                      className="border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white"
-                      onClick={() => window.open("mailto:contratacioneszambra@gmail.com", "_self")}
-                    >
-                      contratacioneszambra@gmail.com
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-primary-800 text-white py-8 px-4">
-        <div className="container mx-auto text-center">
-          <h3 className="text-2xl font-bold mb-4">Grupo Zambra 2.0</h3>
-          <p className="text-primary-200 mb-4">Música en vivo para eventos inolvidables</p>
-          <p className="text-primary-300 text-sm">
+          <p className="font-body text-accent-500 text-sm text-center">
             © {new Date().getFullYear()} Grupo Zambra 2.0. Todos los derechos reservados.
           </p>
         </div>
       </footer>
+
+      {/* Sticky CTA Mobile */}
+      <a
+        href="tel:+34654085517"
+        className="fixed bottom-6 right-6 z-50 md:hidden flex items-center gap-2 px-5 py-3 bg-accent-600 text-white font-display font-bold rounded-full shadow-elegant-lg hover:bg-accent-700 transition-colors"
+        aria-label="Llamar ahora"
+      >
+        <Phone size={18} />
+        <span>Llamar</span>
+      </a>
     </div>
   )
 }

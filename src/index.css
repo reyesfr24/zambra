@@ -1,55 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-html {
-  scroll-behavior: smooth;
-}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 210 40% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 210 100% 85%;
-    --primary-foreground: 210 40% 20%;
-    --secondary: 210 40% 98%;
-    --secondary-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 10%;
+    --primary: 207 100% 85%;
+    --primary-foreground: 207 40% 15%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 210 40% 10%;
     --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 210 100% 85%;
+    --muted-foreground: 210 20% 45%;
+    --accent: 207 100% 85%;
+    --accent-foreground: 210 40% 10%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 30% 90%;
+    --input: 210 30% 90%;
+    --ring: 207 100% 85%;
     --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 100% 85%;
-    --primary-foreground: 210 40% 20%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 210 100% 85%;
   }
 }
 
@@ -57,8 +35,79 @@ html {
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
-    font-family: "Montserrat", sans-serif;
+    @apply bg-white text-accent-950 antialiased;
+    font-family: 'Lato', sans-serif;
+    line-height: 1.7;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  /* Tarjeta elegante */
+  .card-elegant {
+    @apply bg-white rounded-2xl shadow-elegant transition-all duration-300;
+    @apply hover:shadow-elegant-lg hover:-translate-y-1;
+  }
+
+  /* Imagen de galería con overlay */
+  .gallery-image {
+    @apply relative overflow-hidden rounded-xl;
+  }
+
+  .gallery-image img {
+    @apply w-full h-full object-cover transition-transform duration-500;
+  }
+
+  .gallery-image:hover img {
+    @apply scale-105;
+  }
+
+  /* Video container */
+  .video-container {
+    @apply relative overflow-hidden rounded-xl bg-accent-950;
+    @apply shadow-elegant transition-all duration-300;
+    @apply hover:shadow-elegant-lg;
+  }
+
+  /* Social icon */
+  .social-icon {
+    @apply w-11 h-11 rounded-full flex items-center justify-center;
+    @apply bg-accent-100 text-accent-700;
+    @apply transition-all duration-300;
+    @apply hover:bg-accent-200 hover:scale-110;
+  }
+}
+
+/* Animation delays */
+@layer utilities {
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-accent-50;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-accent-300 rounded-full;
+  @apply hover:bg-accent-400;
+}
+
+/* Selection */
+::selection {
+  @apply bg-accent-200 text-accent-900;
 }
