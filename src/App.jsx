@@ -273,12 +273,26 @@ function App() {
               Momentos Capturados
             </h3>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="gallery-image aspect-square">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {[
+                'galeria1.webp',
+                'galeria2.webp',
+                'galeria3.webp',
+                'galeria4.webp',
+                'galeria5.webp',
+                'galeria6.webp',
+                'galeria7.jpg',
+                'galeria8.jpg',
+                'galeria9.jpg',
+                'galeria11.jpg',
+                'galeria12.jpg',
+                'galeria13.jpg',
+                'galeria14.jpg',
+              ].map((img, i) => (
+                <div key={img} className="gallery-image aspect-square">
                   <img
-                    src={`/galeria${i}.webp`}
-                    alt={`Grupo Zambra 2.0 - Momento ${i}`}
+                    src={`/${img}`}
+                    alt={`Grupo Zambra 2.0 - Momento ${i + 1}`}
                     loading="lazy"
                   />
                 </div>
