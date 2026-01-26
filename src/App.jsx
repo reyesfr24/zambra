@@ -51,7 +51,6 @@ function App() {
                 { id: 'inicio', label: 'Inicio' },
                 { id: 'sobre-nosotros', label: 'Nosotros' },
                 { id: 'galeria', label: 'Galería' },
-                { id: 'contacto', label: 'Contacto' },
               ].map((item) => (
                 <button
                   key={item.id}
@@ -288,12 +287,15 @@ function App() {
                 'galeria13.jpg',
                 'galeria14.jpg',
               ].map((img, i) => (
-                <div key={img} className="gallery-image aspect-square">
+                <div key={img} className="group relative aspect-square rounded-xl overflow-hidden">
                   <img
                     src={`/${img}`}
                     alt={`Grupo Zambra 2.0 - Momento ${i + 1}`}
                     loading="lazy"
+                    className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
                   />
+                  <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-accent transition-all duration-300 group-hover:shadow-[inset_0_0_30px_rgba(251,191,36,0.3)]" />
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-accent/40 via-transparent to-transparent" />
                 </div>
               ))}
             </div>
