@@ -154,6 +154,23 @@ html {
   animation: glow 2s ease-in-out infinite;
 }
 
+.hero-title {
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 30px rgba(255, 255, 255, 0.3),
+    0 4px 20px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.08em;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+}
+
+.hero-title-accent {
+  text-shadow:
+    0 0 20px rgba(251, 191, 36, 0.8),
+    0 0 40px rgba(251, 191, 36, 0.5),
+    0 0 60px rgba(251, 191, 36, 0.3);
+  -webkit-text-stroke: 1px rgba(251, 191, 36, 0.5);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
