@@ -93,6 +93,67 @@ html {
   .animation-delay-400 { animation-delay: 400ms; }
 }
 
+/* Hero animations */
+@keyframes heroTitle {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.5), 0 0 40px rgba(251, 191, 36, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(251, 191, 36, 0.8), 0 0 60px rgba(251, 191, 36, 0.5);
+  }
+}
+
+.animate-hero-title {
+  animation: heroTitle 1s ease-out forwards;
+}
+
+.animate-hero-subtitle {
+  opacity: 0;
+  animation: fadeSlideUp 0.8s ease-out 0.4s forwards;
+}
+
+.animate-hero-buttons {
+  opacity: 0;
+  animation: fadeSlideUp 0.8s ease-out 0.7s forwards;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

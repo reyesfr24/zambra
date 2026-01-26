@@ -132,15 +132,15 @@ function App() {
 
         {/* Content - Compacto abajo */}
         <div className="absolute inset-x-0 bottom-8 z-10 text-center px-4">
-          <h1 className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-white mb-2 drop-shadow-lg">
-            GRUPO ZAMBRA <span className="text-accent">2.0</span>
+          <h1 className="font-display font-black text-3xl sm:text-4xl md:text-5xl text-white mb-2 drop-shadow-lg animate-hero-title">
+            GRUPO ZAMBRA <span className="text-accent animate-glow">2.0</span>
           </h1>
 
-          <p className="font-body text-sm md:text-base text-white/90 max-w-md mx-auto mb-4 drop-shadow">
+          <p className="font-body text-sm md:text-base text-white/90 max-w-md mx-auto mb-4 drop-shadow animate-hero-subtitle">
             Música en vivo para tu evento inolvidable
           </p>
 
-          <div className="flex flex-wrap gap-3 justify-center">
+          <div className="flex flex-wrap gap-3 justify-center animate-hero-buttons">
             <button
               onClick={() => scrollToSection('galeria')}
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-accent-900 font-display font-bold text-sm rounded-lg hover:bg-accent-300 transition-colors"
