@@ -319,58 +319,67 @@ function App() {
           </div>
 
           {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {/* Instagram */}
             <a
               href="https://instagram.com/grupozambra"
               target="_blank"
               rel="noopener noreferrer"
-              className="card-elegant p-6 text-center group"
+              className="relative p-8 bg-white rounded-2xl border border-accent-100 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center group overflow-hidden"
             >
-              <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Instagram className="w-7 h-7 text-white" />
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-orange-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative">
+                <div className="w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg shadow-pink-500/30">
+                  <Instagram className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="font-display font-bold text-xl text-accent-900 mb-2">Instagram</h3>
+                <p className="font-body text-accent-600 text-sm mb-4 leading-relaxed">
+                  Síguenos para ver nuestras últimas actuaciones
+                </p>
+                <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-purple-100 to-pink-100 text-pink-600 font-display font-semibold rounded-full text-sm">
+                  @grupozambra
+                </span>
               </div>
-              <h3 className="font-display font-bold text-lg text-accent-900 mb-2">Instagram</h3>
-              <p className="font-body text-accent-600 text-sm mb-3">
-                Síguenos para ver nuestras últimas actuaciones
-              </p>
-              <span className="font-display font-semibold text-accent-500">
-                @grupozambra
-              </span>
             </a>
 
             {/* Teléfono */}
             <a
               href="tel:+34654085517"
-              className="card-elegant p-6 text-center group bg-accent-50 border-2 border-accent-200"
+              className="relative p-8 bg-white rounded-2xl border border-accent-100 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center group overflow-hidden"
             >
-              <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-accent-600 flex items-center justify-center group-hover:scale-110 transition-transform shadow-glow-accent">
-                <Phone className="w-7 h-7 text-white" />
+              <div className="absolute inset-0 bg-gradient-to-br from-accent-500/5 to-accent-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative">
+                <div className="w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-accent-500 to-accent-700 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg shadow-accent-500/30">
+                  <Phone className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="font-display font-bold text-xl text-accent-900 mb-2">Teléfono</h3>
+                <p className="font-body text-accent-600 text-sm mb-4 leading-relaxed">
+                  Llámanos para consultas y reservas
+                </p>
+                <span className="inline-block px-4 py-1.5 bg-accent-100 text-accent-700 font-display font-semibold rounded-full text-sm">
+                  654 085 517
+                </span>
               </div>
-              <h3 className="font-display font-bold text-lg text-accent-900 mb-2">Teléfono</h3>
-              <p className="font-body text-accent-600 text-sm mb-3">
-                Llámanos para consultas y reservas
-              </p>
-              <span className="font-display font-bold text-lg text-accent-600">
-                654 085 517
-              </span>
             </a>
 
             {/* Email */}
             <a
               href="mailto:contratacioneszambra@gmail.com"
-              className="card-elegant p-6 text-center group"
+              className="relative p-8 bg-white rounded-2xl border border-accent-100 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 text-center group overflow-hidden"
             >
-              <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Mail className="w-7 h-7 text-accent-900" />
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-yellow-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative">
+                <div className="w-16 h-16 mx-auto mb-5 rounded-2xl bg-gradient-to-br from-accent to-amber-300 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 shadow-lg shadow-accent/30">
+                  <Mail className="w-8 h-8 text-accent-900" />
+                </div>
+                <h3 className="font-display font-bold text-xl text-accent-900 mb-2">Email</h3>
+                <p className="font-body text-accent-600 text-sm mb-4 leading-relaxed">
+                  Escríbenos para más información
+                </p>
+                <span className="inline-block px-4 py-1.5 bg-accent/20 text-accent-700 font-display font-semibold rounded-full text-xs">
+                  contratacioneszambra@gmail.com
+                </span>
               </div>
-              <h3 className="font-display font-bold text-lg text-accent-900 mb-2">Email</h3>
-              <p className="font-body text-accent-600 text-sm mb-3">
-                Escríbenos para más información
-              </p>
-              <span className="font-display font-semibold text-accent-500 text-sm break-all">
-                contratacioneszambra@gmail.com
-              </span>
             </a>
           </div>
 
