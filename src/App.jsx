@@ -27,27 +27,29 @@ function App() {
           : 'bg-transparent border-b border-white/20 py-5'
       }`}>
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
-          <div className="flex justify-between items-center">
+          <div className="flex items-center">
 
             {/* Logo */}
-            <button
-              onClick={() => scrollToSection('inicio')}
-              className={`animate-navbar-logo flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full font-display font-bold text-sm tracking-wide transition-all duration-300 shrink-0 ${
-                isScrolled
-                  ? 'bg-accent-600 text-white hover:bg-accent-700'
-                  : 'bg-white text-accent-900 hover:bg-white/90'
-              }`}
-            >
-              <img
-                src="/logo.jpg"
-                alt="Logo Grupo Zambra"
-                className="h-7 w-7 rounded-full object-cover"
-              />
-              Grupo Zambra
-            </button>
+            <div className="flex-1">
+              <button
+                onClick={() => scrollToSection('inicio')}
+                className={`animate-navbar-logo flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full font-display font-bold text-sm tracking-wide transition-all duration-300 shrink-0 ${
+                  isScrolled
+                    ? 'bg-accent-600 text-white hover:bg-accent-700'
+                    : 'bg-white text-accent-900 hover:bg-white/90'
+                }`}
+              >
+                <img
+                  src="/logo.jpg"
+                  alt="Logo Grupo Zambra"
+                  className="h-7 w-7 rounded-full object-cover"
+                />
+                Grupo Zambra
+              </button>
+            </div>
 
             {/* Nav Desktop — centrado */}
-            <div className={`animate-navbar-center hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2 px-2 py-1.5 rounded-full transition-all duration-300 ${
+            <div className={`animate-navbar-center hidden md:flex items-center gap-1 px-2 py-1.5 rounded-full transition-all duration-300 ${
               isScrolled ? 'bg-accent-600' : 'bg-white'
             }`}>
               {[
@@ -71,7 +73,7 @@ function App() {
             </div>
 
             {/* Derecha: botón con flecha */}
-            <div className="animate-navbar-right hidden md:flex items-center shrink-0">
+            <div className="animate-navbar-right flex-1 hidden md:flex items-center justify-end">
               <button
                 onClick={() => scrollToSection('contacto')}
                 className={`flex items-center gap-2 pl-5 pr-2 py-2 font-display font-semibold text-sm rounded-full transition-all duration-300 ${
@@ -136,7 +138,7 @@ function App() {
       {/* ========== HERO SECTION ========== */}
       <section
         id="inicio"
-        className="relative h-[70vh] min-h-[500px] md:h-[80vh] lg:h-screen lg:min-h-[800px] overflow-hidden"
+        className="relative h-[45vh] min-h-[315px] md:h-[80vh] lg:h-screen lg:min-h-[800px] overflow-hidden"
       >
         {/* Capa 1: Foto de fondo completa */}
         <div className="absolute inset-0 z-0">
@@ -150,10 +152,10 @@ function App() {
         </div>
 
         {/* Capa 2: Texto grande detrás de las personas */}
-        <div className="absolute inset-x-0 top-16 z-10 flex items-start justify-center pointer-events-none select-none">
+        <div className="absolute inset-x-0 top-24 md:top-16 z-10 flex items-start justify-center pointer-events-none select-none">
           <h1
-            className="font-display font-black text-white/75 text-center leading-none tracking-tighter hero-title"
-            style={{ fontSize: 'clamp(5rem, 18vw, 18rem)' }}
+            className="font-display font-black text-white/75 text-center leading-none tracking-tighter hero-title whitespace-nowrap"
+            style={{ fontSize: 'clamp(4rem, 19vw, 18rem)' }}
           >
             {'ZAMBRA'.split('').map((letter, i) => (
               <span
@@ -169,21 +171,24 @@ function App() {
 
         {/* Capa 3: Personas en primer plano (PNG fondo transparente) */}
         {/* ⚠️ Crea /public/portada-fg.png con remove.bg u otra herramienta */}
-        <div className="absolute inset-0 z-20 animate-fg-rise">
+        <div className="absolute inset-x-0 bottom-0 md:inset-0 z-20 animate-fg-rise">
           <img
             src="/portada-fg.png"
             alt=""
             aria-hidden="true"
-            className="w-full h-full object-cover"
+            className="w-full origin-bottom scale-[1.3] md:scale-100 md:h-full md:object-cover"
             style={{ objectPosition: 'center 30%' }}
           />
         </div>
 
-        {/* Capa 4: Texto y botones */}
-        <div className="absolute bottom-10 left-0 right-0 z-30 px-8 sm:px-12 md:px-16 max-w-6xl mx-auto">
+        {/* Gradiente legibilidad — encima de personas */}
+        <div className="absolute inset-x-0 bottom-0 h-36 z-[25] bg-gradient-to-t from-black/70 via-black/30 to-transparent pointer-events-none" />
 
-          {/* Tag — línea + flecha + texto */}
-          <div className="flex items-center gap-3 mb-4 animate-hero-subtitle">
+        {/* Capa 4: Texto y botones */}
+        <div className="absolute bottom-3 md:bottom-10 left-0 right-0 z-30 px-8 sm:px-12 md:px-16 max-w-6xl mx-auto">
+
+          {/* Tag — solo desktop */}
+          <div className="hidden md:flex items-center gap-3 mb-4 animate-hero-subtitle">
             <span className="w-8 h-px bg-white/60" />
             <span className="font-display text-xs tracking-[0.2em] uppercase text-white/70">
               Música en Vivo
@@ -191,15 +196,15 @@ function App() {
           </div>
 
           {/* Heading principal */}
-          <h1 className="font-display font-normal text-white leading-tight mb-6 animate-hero-title hero-title"
-            style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)' }}
+          <h1 className="font-display font-normal text-white leading-tight mb-0 md:mb-6 animate-hero-title hero-title"
+            style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', letterSpacing: '-0.0em' }}
           >
             Música para tu<br />
             Evento Especial
           </h1>
 
-          {/* Botones */}
-          <div className="flex flex-wrap gap-3 animate-hero-buttons">
+          {/* Botones — solo desktop */}
+          <div className="hidden md:flex flex-wrap gap-3 animate-hero-buttons">
             <button
               onClick={() => scrollToSection('galeria')}
               className="flex items-center gap-2 pl-5 pr-1.5 py-1.5 bg-white text-accent-900 font-display font-medium text-sm rounded-full hover:bg-white/90 transition-colors"
