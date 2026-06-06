@@ -4,6 +4,7 @@ import { Instagram, Phone, Mail, Play, ChevronDown, Menu, X, ArrowRight } from '
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [fgLoaded, setFgLoaded] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -170,14 +171,15 @@ function App() {
         </div>
 
         {/* Capa 3: Personas en primer plano (PNG fondo transparente) */}
-        {/* ⚠️ Crea /public/portada-fg.png con remove.bg u otra herramienta */}
-        <div className="absolute inset-0 z-20 animate-fg-rise">
+        <div className={`absolute inset-0 z-20 ${fgLoaded ? 'animate-fg-rise' : 'opacity-0'}`}>
           <img
             src="/portada-fg.png"
             alt=""
             aria-hidden="true"
+            fetchPriority="high"
             className="w-full h-full object-cover object-bottom md:object-center"
             style={{ objectPosition: 'center bottom' }}
+            onLoad={() => setFgLoaded(true)}
           />
         </div>
 
