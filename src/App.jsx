@@ -32,7 +32,7 @@ function App() {
             {/* Logo */}
             <button
               onClick={() => scrollToSection('inicio')}
-              className={`flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full font-display font-bold text-sm tracking-wide transition-all duration-300 shrink-0 ${
+              className={`animate-navbar-logo flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full font-display font-bold text-sm tracking-wide transition-all duration-300 shrink-0 ${
                 isScrolled
                   ? 'bg-accent-600 text-white hover:bg-accent-700'
                   : 'bg-white text-accent-900 hover:bg-white/90'
@@ -47,7 +47,7 @@ function App() {
             </button>
 
             {/* Nav Desktop — centrado */}
-            <div className={`hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2 px-2 py-1.5 rounded-full transition-all duration-300 ${
+            <div className={`animate-navbar-center hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2 px-2 py-1.5 rounded-full transition-all duration-300 ${
               isScrolled ? 'bg-accent-600' : 'bg-white'
             }`}>
               {[
@@ -71,7 +71,7 @@ function App() {
             </div>
 
             {/* Derecha: botón con flecha */}
-            <div className="hidden md:flex items-center shrink-0">
+            <div className="animate-navbar-right hidden md:flex items-center shrink-0">
               <button
                 onClick={() => scrollToSection('contacto')}
                 className={`flex items-center gap-2 pl-5 pr-2 py-2 font-display font-semibold text-sm rounded-full transition-all duration-300 ${
@@ -141,9 +141,9 @@ function App() {
         {/* Capa 1: Foto de fondo completa */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/portada.webp"
+            src="/portada-bg.webp"
             alt="Grupo Zambra 2.0"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover animate-bg-zoom"
             style={{ objectPosition: 'center 30%' }}
           />
           <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
@@ -152,16 +152,24 @@ function App() {
         {/* Capa 2: Texto grande detrás de las personas */}
         <div className="absolute inset-x-0 top-16 z-10 flex items-start justify-center pointer-events-none select-none">
           <h1
-            className="font-display font-black text-white/75 text-center leading-none tracking-tighter animate-hero-title hero-title"
+            className="font-display font-black text-white/75 text-center leading-none tracking-tighter hero-title"
             style={{ fontSize: 'clamp(5rem, 18vw, 18rem)' }}
           >
-            ZAMBRA
+            {'ZAMBRA'.split('').map((letter, i) => (
+              <span
+                key={i}
+                className="hero-letter"
+                style={{ animationDelay: `${850 + i * 80}ms` }}
+              >
+                {letter}
+              </span>
+            ))}
           </h1>
         </div>
 
         {/* Capa 3: Personas en primer plano (PNG fondo transparente) */}
         {/* ⚠️ Crea /public/portada-fg.png con remove.bg u otra herramienta */}
-        <div className="absolute inset-0 z-20">
+        <div className="absolute inset-0 z-20 animate-fg-rise">
           <img
             src="/portada-fg.png"
             alt=""

@@ -93,6 +93,40 @@ html {
   .animation-delay-400 { animation-delay: 400ms; }
 }
 
+/* ---- INTRO SEQUENCE ---- */
+@keyframes navbarDrop {
+  from { opacity: 0; transform: translateY(-22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bgZoomOut {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1); }
+}
+
+@keyframes fgRise {
+  from { opacity: 0; transform: translateY(50px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes letterIn {
+  from { opacity: 0; filter: blur(6px); transform: translateY(8px); }
+  to   { opacity: 1; filter: blur(0);   transform: translateY(0); }
+}
+
+.animate-navbar-logo   { opacity: 0; animation: navbarDrop 0.55s ease-out 0.05s forwards; }
+.animate-navbar-center { opacity: 0; animation: navbarDrop 0.55s ease-out 0.18s forwards; }
+.animate-navbar-right  { opacity: 0; animation: navbarDrop 0.55s ease-out 0.30s forwards; }
+
+.animate-bg-zoom { animation: bgZoomOut 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+.animate-fg-rise { opacity: 0; animation: fgRise 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
+
+.hero-letter {
+  display: inline-block;
+  opacity: 0;
+  animation: letterIn 0.35s ease-out forwards;
+}
+
 /* Hero animations */
 @keyframes heroTitle {
   0% {
