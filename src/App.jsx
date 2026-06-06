@@ -138,7 +138,7 @@ function App() {
       {/* ========== HERO SECTION ========== */}
       <section
         id="inicio"
-        className="relative h-[45vh] min-h-[315px] md:h-[80vh] lg:h-screen lg:min-h-[800px] overflow-hidden"
+        className="relative h-[45vh] min-h-[495px] md:h-[80vh] lg:h-screen lg:min-h-[800px] overflow-hidden"
       >
         {/* Capa 1: Foto de fondo completa */}
         <div className="absolute inset-0 z-0">
