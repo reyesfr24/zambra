@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Instagram, Phone, Mail, Play, ChevronDown, Menu, X } from 'lucide-react'
+import { Instagram, Phone, Mail, Play, ChevronDown, Menu, X, ArrowRight } from 'lucide-react'
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -21,61 +21,78 @@ function App() {
   return (
     <div className="min-h-screen bg-white">
       {/* ========== NAVEGACIÓN ========== */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-elegant py-3'
-          : 'bg-black/20 backdrop-blur-sm py-4'
+          ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200 py-3'
+          : 'bg-transparent border-b border-white/20 py-5'
       }`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
           <div className="flex justify-between items-center">
+
             {/* Logo */}
             <button
               onClick={() => scrollToSection('inicio')}
-              className="flex items-center gap-3"
+              className={`flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full font-display font-bold text-sm tracking-wide transition-all duration-300 shrink-0 ${
+                isScrolled
+                  ? 'bg-accent-600 text-white hover:bg-accent-700'
+                  : 'bg-white text-accent-900 hover:bg-white/90'
+              }`}
             >
               <img
                 src="/logo.jpg"
                 alt="Logo Grupo Zambra"
-                className="h-10 w-10 rounded-full object-cover ring-2 ring-accent/50"
+                className="h-7 w-7 rounded-full object-cover"
               />
-              <span className={`font-display font-bold text-lg transition-colors ${
-                isScrolled ? 'text-accent-900' : 'text-white'
-              }`}>
-                Zambra 2.0
-              </span>
+              Grupo Zambra
             </button>
 
-            {/* Nav Desktop */}
-            <div className="hidden md:flex items-center gap-1">
+            {/* Nav Desktop — centrado */}
+            <div className={`hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2 px-2 py-1.5 rounded-full transition-all duration-300 ${
+              isScrolled ? 'bg-accent-600' : 'bg-white'
+            }`}>
               {[
                 { id: 'inicio', label: 'Inicio' },
                 { id: 'sobre-nosotros', label: 'Nosotros' },
                 { id: 'galeria', label: 'Galería' },
+                { id: 'contacto', label: 'Contacto' },
               ].map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`px-4 py-2 font-display font-medium text-sm rounded-lg transition-colors ${
+                  className={`px-4 py-1.5 font-display font-semibold text-sm rounded-full transition-all duration-300 ${
                     isScrolled
-                      ? 'text-accent-700 hover:text-accent-900 hover:bg-accent-50'
-                      : 'text-white/90 hover:text-white hover:bg-white/10'
+                      ? 'text-white hover:bg-white/15'
+                      : 'text-accent-900 hover:bg-black/5'
                   }`}
                 >
                   {item.label}
                 </button>
               ))}
+            </div>
+
+            {/* Derecha: botón con flecha */}
+            <div className="hidden md:flex items-center shrink-0">
               <button
                 onClick={() => scrollToSection('contacto')}
-                className="ml-3 px-5 py-2 bg-accent-600 text-white font-display font-semibold text-sm rounded-lg hover:bg-accent-700 transition-colors"
+                className={`flex items-center gap-2 pl-5 pr-2 py-2 font-display font-semibold text-sm rounded-full transition-all duration-300 ${
+                  isScrolled
+                    ? 'bg-accent-600 text-white hover:bg-accent-700'
+                    : 'bg-white text-accent-900 hover:bg-white/90'
+                }`}
               >
                 Contrátanos
+                <span className={`flex items-center justify-center w-6 h-6 rounded-full transition-colors ${
+                  isScrolled ? 'bg-white/20' : 'bg-accent-900/10'
+                }`}>
+                  <ArrowRight size={13} />
+                </span>
               </button>
             </div>
 
             {/* Mobile Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`md:hidden p-2 rounded-lg ${
+              className={`md:hidden p-2 rounded-lg transition-colors ${
                 isScrolled ? 'text-accent-900' : 'text-white'
               }`}
             >
@@ -86,8 +103,8 @@ function App() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-accent-100 shadow-lg">
-            <div className="px-4 py-4 space-y-1">
+          <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-accent-100 shadow-lg">
+            <div className="px-6 py-4 space-y-1">
               {[
                 { id: 'inicio', label: 'Inicio' },
                 { id: 'sobre-nosotros', label: 'Sobre Nosotros' },
@@ -97,16 +114,19 @@ function App() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-4 py-3 font-display font-medium text-accent-800 hover:bg-accent-50 rounded-lg"
+                  className="block w-full text-left px-3 py-3 font-display font-medium text-accent-800 hover:text-accent-900 border-b border-accent-50 last:border-0"
                 >
                   {item.label}
                 </button>
               ))}
               <button
                 onClick={() => scrollToSection('contacto')}
-                className="w-full mt-2 px-4 py-3 bg-accent-600 text-white font-display font-semibold rounded-lg"
+                className="w-full mt-3 px-5 py-3 bg-accent-600 text-white font-display font-semibold rounded-full flex items-center justify-center gap-2"
               >
                 Contrátanos
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/20">
+                  <ArrowRight size={13} />
+                </span>
               </button>
             </div>
           </div>
@@ -116,45 +136,79 @@ function App() {
       {/* ========== HERO SECTION ========== */}
       <section
         id="inicio"
-        className="relative h-[70vh] min-h-[500px] md:h-[80vh] lg:h-screen lg:min-h-[800px]"
+        className="relative h-[70vh] min-h-[500px] md:h-[80vh] lg:h-screen lg:min-h-[800px] overflow-hidden"
       >
-        {/* Background */}
-        <div className="absolute inset-0">
+        {/* Capa 1: Foto de fondo completa */}
+        <div className="absolute inset-0 z-0">
           <img
             src="/portada.webp"
             alt="Grupo Zambra 2.0"
             className="w-full h-full object-cover"
             style={{ objectPosition: 'center 30%' }}
           />
-          {/* Gradiente inferior para el texto */}
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
         </div>
 
-        {/* Content - Compacto abajo */}
-        <div className="absolute inset-x-0 bottom-8 z-10 text-center px-4">
-          <div className="inline-block mb-2 px-6 py-3 bg-black/30 backdrop-blur-sm rounded-2xl border border-white/10">
-            <h1 className="font-display font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white animate-hero-title hero-title tracking-wider">
-              GRUPO ZAMBRA <span className="text-accent animate-glow hero-title-accent">2.0</span>
-            </h1>
+        {/* Capa 2: Texto grande detrás de las personas */}
+        <div className="absolute inset-x-0 top-16 z-10 flex items-start justify-center pointer-events-none select-none">
+          <h1
+            className="font-display font-black text-white/75 text-center leading-none tracking-tighter animate-hero-title hero-title"
+            style={{ fontSize: 'clamp(5rem, 18vw, 18rem)' }}
+          >
+            ZAMBRA
+          </h1>
+        </div>
+
+        {/* Capa 3: Personas en primer plano (PNG fondo transparente) */}
+        {/* ⚠️ Crea /public/portada-fg.png con remove.bg u otra herramienta */}
+        <div className="absolute inset-0 z-20">
+          <img
+            src="/portada-fg.png"
+            alt=""
+            aria-hidden="true"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: 'center 30%' }}
+          />
+        </div>
+
+        {/* Capa 4: Texto y botones */}
+        <div className="absolute bottom-10 left-0 right-0 z-30 px-8 sm:px-12 md:px-16 max-w-6xl mx-auto">
+
+          {/* Tag — línea + flecha + texto */}
+          <div className="flex items-center gap-3 mb-4 animate-hero-subtitle">
+            <span className="w-8 h-px bg-white/60" />
+            <span className="font-display text-xs tracking-[0.2em] uppercase text-white/70">
+              Música en Vivo
+            </span>
           </div>
 
-          <p className="font-body text-sm md:text-base text-white/90 max-w-md mx-auto mb-4 drop-shadow animate-hero-subtitle">
-            Música en vivo para tu evento inolvidable
-          </p>
+          {/* Heading principal */}
+          <h1 className="font-display font-normal text-white leading-tight mb-6 animate-hero-title hero-title"
+            style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)' }}
+          >
+            Música para tu<br />
+            Evento Especial
+          </h1>
 
-          <div className="flex flex-wrap gap-3 justify-center animate-hero-buttons">
+          {/* Botones */}
+          <div className="flex flex-wrap gap-3 animate-hero-buttons">
             <button
               onClick={() => scrollToSection('galeria')}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-accent text-accent-900 font-display font-bold text-sm rounded-lg hover:bg-accent-300 transition-colors"
+              className="flex items-center gap-2 pl-5 pr-1.5 py-1.5 bg-white text-accent-900 font-display font-medium text-sm rounded-full hover:bg-white/90 transition-colors"
             >
-              <Play size={16} />
               Ver Videos
+              <span className="flex items-center justify-center w-7 h-7 rounded-full bg-accent">
+                <Play size={13} className="text-accent-900" />
+              </span>
             </button>
             <button
               onClick={() => scrollToSection('contacto')}
-              className="px-5 py-2.5 bg-white/15 backdrop-blur-sm border border-white/30 text-white font-display font-semibold text-sm rounded-lg hover:bg-white/25 transition-colors"
+              className="flex items-center gap-2 pl-5 pr-1.5 py-1.5 bg-white/15 backdrop-blur-sm border border-white/30 text-white font-display font-medium text-sm rounded-full hover:bg-white/25 transition-colors"
             >
-              Contactar
+              Contrátanos
+              <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/20">
+                <ArrowRight size={13} className="text-white" />
+              </span>
             </button>
           </div>
         </div>
