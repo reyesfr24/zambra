@@ -38,4 +38,4 @@ vite.config.js        # Configuración de Vite
 
 ## 📧 Contacto
 
-Para más información o consultas, por favor contactar a través de las redes sociales de **Grupo Zambra 2.0** o enviar un correo electrónico a [info@grupozambra20.com](mailto:info@grupozambra20.com).
+Para más información o consultas, por favor contactar a través de las redes sociales de **Grupo Zambra 2.0** o enviar un correo electrónico a [info@grupozambra20.com](mailto:info@grupozambra20.com). sd
