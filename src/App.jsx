@@ -4,7 +4,6 @@ import { Instagram, Phone, Mail, Play, ChevronDown, Menu, X, ArrowRight } from '
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [fgLoaded, setFgLoaded] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -139,7 +138,7 @@ function App() {
       {/* ========== HERO SECTION ========== */}
       <section
         id="inicio"
-        className="relative h-[500px] md:h-[80vh] lg:h-screen lg:min-h-[800px] overflow-hidden"
+        className="relative h-[45vh] min-h-[495px] md:h-[80vh] lg:h-screen lg:min-h-[800px] overflow-hidden"
       >
         {/* Capa 1: Foto de fondo completa */}
         <div className="absolute inset-0 z-0">
@@ -171,15 +170,14 @@ function App() {
         </div>
 
         {/* Capa 3: Personas en primer plano (PNG fondo transparente) */}
-        <div className={`absolute inset-0 z-20 ${fgLoaded ? 'animate-fg-rise' : 'opacity-0'}`}>
+        {/* ⚠️ Crea /public/portada-fg.png con remove.bg u otra herramienta */}
+        <div className="absolute inset-x-0 bottom-0 md:inset-0 z-20 animate-fg-rise">
           <img
             src="/portada-fg.png"
             alt=""
             aria-hidden="true"
-            fetchPriority="high"
-            className="w-full h-full object-cover object-bottom md:object-center"
-            style={{ objectPosition: 'center bottom' }}
-            onLoad={() => setFgLoaded(true)}
+            className="w-full origin-bottom scale-[1.3] md:scale-100 md:h-full md:object-cover"
+            style={{ objectPosition: 'center 30%' }}
           />
         </div>
 

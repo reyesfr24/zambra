@@ -119,7 +119,7 @@ html {
 .animate-navbar-right  { opacity: 0; animation: navbarDrop 0.55s ease-out 0.30s forwards; }
 
 .animate-bg-zoom { animation: bgZoomOut 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
-.animate-fg-rise { opacity: 0; animation: fgRise 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-fg-rise { opacity: 0; animation: fgRise 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; }
 
 .hero-letter {
   display: inline-block;
