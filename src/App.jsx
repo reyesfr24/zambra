@@ -4,6 +4,7 @@ import { Instagram, Phone, Mail, Play, ChevronDown, Menu, X, ArrowRight } from '
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [heroReady, setHeroReady] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -145,8 +146,9 @@ function App() {
           <img
             src="/portada-bg.webp"
             alt="Grupo Zambra 2.0"
-            className="w-full h-full object-cover animate-bg-zoom"
-            style={{ objectPosition: 'center 30%' }}
+            fetchPriority="high"
+            className={`w-full h-full object-cover ${heroReady ? 'animate-bg-zoom' : ''}`}
+            style={{ objectPosition: 'center 30%', transform: heroReady ? undefined : 'scale(1.06)' }}
           />
           <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
         </div>
@@ -160,8 +162,8 @@ function App() {
             {'ZAMBRA'.split('').map((letter, i) => (
               <span
                 key={i}
-                className="hero-letter"
-                style={{ animationDelay: `${850 + i * 80}ms` }}
+                className={heroReady ? 'hero-letter' : 'opacity-0'}
+                style={heroReady ? { animationDelay: `${850 + i * 80}ms` } : undefined}
               >
                 {letter}
               </span>
@@ -170,12 +172,13 @@ function App() {
         </div>
 
         {/* Capa 3: Personas en primer plano (PNG fondo transparente) */}
-        {/* ⚠️ Crea /public/portada-fg.png con remove.bg u otra herramienta */}
-        <div className="absolute inset-x-0 bottom-0 md:inset-0 z-20 animate-fg-rise">
+        <div className={`absolute inset-x-0 bottom-0 md:inset-0 z-20 ${heroReady ? 'animate-fg-rise' : 'opacity-0'}`}>
           <img
             src="/portada-fg.png"
             alt=""
             aria-hidden="true"
+            fetchPriority="high"
+            onLoad={() => setHeroReady(true)}
             className="w-full origin-bottom scale-[1.3] md:scale-100 md:h-full md:object-cover"
             style={{ objectPosition: 'center 30%' }}
           />
@@ -188,7 +191,7 @@ function App() {
         <div className="absolute bottom-3 md:bottom-10 left-0 right-0 z-30 px-8 sm:px-12 md:px-16 max-w-6xl mx-auto">
 
           {/* Tag — solo desktop */}
-          <div className="hidden md:flex items-center gap-3 mb-4 animate-hero-subtitle">
+          <div className={`hidden md:flex items-center gap-3 mb-4 ${heroReady ? 'animate-hero-subtitle' : 'opacity-0'}`}>
             <span className="w-8 h-px bg-white/60" />
             <span className="font-display text-xs tracking-[0.2em] uppercase text-white/70">
               Música en Vivo
@@ -196,7 +199,7 @@ function App() {
           </div>
 
           {/* Heading principal */}
-          <h1 className="font-display font-normal text-white leading-tight mb-0 md:mb-6 animate-hero-title hero-title"
+          <h1 className={`font-display font-normal text-white leading-tight mb-0 md:mb-6 hero-title ${heroReady ? 'animate-hero-title' : 'opacity-0'}`}
             style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', letterSpacing: '-0.0em' }}
           >
             Música para tu<br />
@@ -204,7 +207,7 @@ function App() {
           </h1>
 
           {/* Botones — solo desktop */}
-          <div className="hidden md:flex flex-wrap gap-3 animate-hero-buttons">
+          <div className={`hidden md:flex flex-wrap gap-3 ${heroReady ? 'animate-hero-buttons' : 'opacity-0'}`}>
             <button
               onClick={() => scrollToSection('galeria')}
               className="flex items-center gap-2 pl-5 pr-1.5 py-1.5 bg-white text-accent-900 font-display font-medium text-sm rounded-full hover:bg-white/90 transition-colors"
