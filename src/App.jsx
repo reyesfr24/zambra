@@ -229,7 +229,7 @@ function App() {
 
           {/* Heading principal */}
           <h1 className={`font-display font-normal text-white leading-tight mb-0 md:mb-6 hero-title ${heroReady ? 'animate-hero-title' : 'opacity-0'}`}
-            style={{ fontSize: 'clamp(2.2rem, 5vw, 4rem)', letterSpacing: '-0.0em' }}
+            style={{ fontSize: 'clamp(1px, 9vw, 4rem)', letterSpacing: '-0.0em' }}
           >
             Música para tu<br />
             Evento Especial
