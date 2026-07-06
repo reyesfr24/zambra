@@ -3,16 +3,27 @@ import { Instagram, Phone, Mail, Play, ChevronDown, Menu, X, ArrowRight } from '
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [navVisible, setNavVisible] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [heroReady, setHeroReady] = useState(false)
 
   useEffect(() => {
+    let lastY = window.scrollY
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      const currentY = window.scrollY
+      const atTop = currentY < 50
+      const scrollingUp = currentY < lastY
+
+      setIsScrolled(currentY > 50)
+      setNavVisible(atTop || scrollingUp)
+      if (mobileMenuOpen && !atTop && !scrollingUp) setMobileMenuOpen(false)
+      lastY = currentY
     }
-    window.addEventListener('scroll', handleScroll)
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [mobileMenuOpen])
 
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -26,7 +37,7 @@ function App() {
         isScrolled
           ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-200 py-3'
           : 'bg-transparent border-b border-white/20 py-5'
-      }`}>
+      } ${navVisible ? 'translate-y-0' : '-translate-y-full'}`}>
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           <div className="flex items-center">
 
@@ -36,7 +47,7 @@ function App() {
                 onClick={() => scrollToSection('inicio')}
                 className={`animate-navbar-logo flex items-center gap-2 pl-2 pr-4 py-1.5 rounded-full font-display font-bold text-sm tracking-wide transition-all duration-300 shrink-0 ${
                   isScrolled
-                    ? 'bg-accent-600 text-white hover:bg-accent-700'
+                    ? 'bg-accent-950 text-white hover:bg-accent-900'
                     : 'bg-white text-accent-900 hover:bg-white/90'
                 }`}
               >
@@ -51,7 +62,7 @@ function App() {
 
             {/* Nav Desktop — centrado */}
             <div className={`animate-navbar-center hidden md:flex items-center gap-1 px-2 py-1.5 rounded-full transition-all duration-300 ${
-              isScrolled ? 'bg-accent-600' : 'bg-white'
+              isScrolled ? 'bg-accent-950' : 'bg-white'
             }`}>
               {[
                 { id: 'inicio', label: 'Inicio' },
@@ -79,7 +90,7 @@ function App() {
                 onClick={() => scrollToSection('contacto')}
                 className={`flex items-center gap-2 pl-5 pr-2 py-2 font-display font-semibold text-sm rounded-full transition-all duration-300 ${
                   isScrolled
-                    ? 'bg-accent-600 text-white hover:bg-accent-700'
+                    ? 'bg-accent-950 text-white hover:bg-accent-900'
                     : 'bg-white text-accent-900 hover:bg-white/90'
                 }`}
               >
@@ -104,39 +115,57 @@ function App() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white/95 backdrop-blur-md border-t border-accent-100 shadow-lg">
-            <div className="px-6 py-4 space-y-1">
-              {[
-                { id: 'inicio', label: 'Inicio' },
-                { id: 'sobre-nosotros', label: 'Sobre Nosotros' },
-                { id: 'galeria', label: 'Galería' },
-                { id: 'contacto', label: 'Contacto' },
-              ].map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-3 py-3 font-display font-medium text-accent-800 hover:text-accent-900 border-b border-accent-50 last:border-0"
-                >
-                  {item.label}
-                </button>
-              ))}
-              <button
-                onClick={() => scrollToSection('contacto')}
-                className="w-full mt-3 px-5 py-3 bg-accent-600 text-white font-display font-semibold rounded-full flex items-center justify-center gap-2"
-              >
-                Contrátanos
-                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/20">
-                  <ArrowRight size={13} />
-                </span>
-              </button>
-            </div>
-          </div>
-        )}
       </nav>
 
+      {/* Mobile Menu — overlay pantalla completa */}
+      <div className={`fixed inset-0 z-[60] md:hidden bg-accent-950 flex flex-col transition-all duration-300 ease-out ${
+        mobileMenuOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-4 pointer-events-none'
+      }`}>
+        {/* Barra superior */}
+        <div className="flex items-center justify-end px-6 py-4 border-b border-white/10 shrink-0">
+          <button
+            onClick={() => setMobileMenuOpen(false)}
+            className="w-9 h-9 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        {/* Items de navegación */}
+        <div className="flex flex-col px-8 pt-6 flex-1">
+          {[
+            { id: 'inicio', label: 'Inicio' },
+            { id: 'sobre-nosotros', label: 'Sobre Nosotros' },
+            { id: 'galeria', label: 'Galería' },
+            { id: 'contacto', label: 'Contacto' },
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className="flex items-center justify-between w-full py-5 font-display font-bold text-2xl text-white/70 hover:text-white border-b border-white/10 last:border-0 transition-colors group"
+            >
+              {item.label}
+              <ArrowRight size={18} className="text-white/25 group-hover:text-white/50 transition-colors" />
+            </button>
+          ))}
+        </div>
+
+        {/* Botón CTA */}
+        <div className="px-8 py-8 shrink-0">
+          <button
+            onClick={() => scrollToSection('contacto')}
+            className="w-full py-4 bg-accent-600 text-white font-display font-bold text-base rounded-full flex items-center justify-center gap-2 hover:bg-accent-700 active:scale-95 transition-all"
+          >
+            Contrátanos
+            <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/20">
+              <ArrowRight size={14} />
+            </span>
+          </button>
+        </div>
+      </div>
+
       {/* ========== HERO SECTION ========== */}
+
       <section
         id="inicio"
         className="relative h-[95vw] max-h-[80vh] md:max-h-none md:h-[80vh] lg:h-screen lg:min-h-[800px] overflow-hidden"
