@@ -208,7 +208,7 @@ function App() {
             aria-hidden="true"
             fetchPriority="high"
             onLoad={() => setHeroReady(true)}
-            className="w-full origin-bottom scale-[1.3] md:scale-100 md:h-full md:object-cover"
+            className="w-full origin-bottom scale-[1.3] md:scale-100 md:h-full md:object-cover hero-fg-img"
             style={{ objectPosition: 'center 30%' }}
           />
         </div>
@@ -220,19 +220,19 @@ function App() {
         <div className="absolute bottom-3 md:bottom-10 left-0 right-0 z-30 px-8 sm:px-12 md:px-16 max-w-6xl mx-auto">
 
           {/* Tag — solo desktop */}
-          <div className={`hidden md:flex items-center gap-3 mb-4 ${heroReady ? 'animate-hero-subtitle' : 'opacity-0'}`}>
+          {/* <div className={`hidden md:flex items-center gap-3 mb-4 ${heroReady ? 'animate-hero-subtitle' : 'opacity-0'}`}>
             <span className="w-8 h-px bg-white/60" />
             <span className="font-display text-xs tracking-[0.2em] uppercase text-white/70">
               Música en Vivo
             </span>
-          </div>
+          </div> */}
 
           {/* Heading principal */}
           <h1 className={`font-display font-normal text-white leading-tight mb-0 md:mb-6 hero-title ${heroReady ? 'animate-hero-title' : 'opacity-0'}`}
             style={{ fontSize: 'clamp(1px, 9vw, 4rem)', letterSpacing: '-0.0em' }}
           >
-            Música para tu<br />
-            Evento Especial
+            ¡Música en vivo y<br />
+            mucho buen rollo!
           </h1>
 
           {/* Botones — solo desktop */}
